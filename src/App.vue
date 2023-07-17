@@ -2,7 +2,9 @@
 import HeaderComponent from "./components/HeaderComponent.vue";
 import MainComponent from "./components/MainComponent.vue";
 import FooterComponent from "./components/FooterComponent.vue";
+import LoadingScreen from "./components/LoadingScreen.vue";
 import axios from 'axios'
+import {store} from './store.js'
 
 export default {
   name: "App",
@@ -10,25 +12,33 @@ export default {
     HeaderComponent,
     MainComponent,
     FooterComponent,
+    LoadingScreen,
   },
   data() {
     return {
-      cardsArray:[]
+    store,
     };
   },
   methods: {},
-  created(){
-    axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+  // created(){
+  //   axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+  //     .then(res=>{
+  //       this.store.cardsArray=res.data.data
+  //       console.log(res.data.data[0].card_images[0].image_url)
+  //       // .data.data[0].card_images[0].image_url
+
+  //     }
+  //     )
+  // },
+  mounted(){setTimeout(
+    ()=>{axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
       .then(res=>{
-        this.cardsArray=res.data.data
+        this.store.cardsArray=res.data.data
         console.log(res.data.data[0].card_images[0].image_url)
         // .data.data[0].card_images[0].image_url
 
       }
-      )
-  },
-  mounted(){setTimeout(
-    ()=>{console.log(this.cardsArray)},1000)
+      )},8000)
     
   }
 };
@@ -39,7 +49,9 @@ export default {
     
     <HeaderComponent />
   
-    <MainComponent />
+    <LoadingScreen v-if="store.cardsArray.length==0"/>
+
+    <MainComponent v-else />
   
     <FooterComponent />
     

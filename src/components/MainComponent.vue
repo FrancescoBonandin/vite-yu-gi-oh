@@ -1,8 +1,13 @@
 <script>
+import {store} from '../store.js'
+
 export default {
     name: "MainComponent",
+    components:{
+    },
     data() {
         return {
+            store
 
         }
     },
@@ -41,27 +46,34 @@ export default {
 
                 <div class="col text-light bg-dark">
 
-                    found XX cards
+                    found {{ store.cardsArray.length }} cards
 
                 </div>
 
             </div>
 
-            <div class="row card-container justify-content-between align-items center mx-3">
+            <div class="row flex-wrap row-cols-4 card-container justify-content-between align-items-center mx-3 g-2">
 
-                <div class="col-auto">
+                <div v-for="(ygoCard,i) in store.cardsArray" :key="i"  class="col p-3">
+                    
+                    <div class="col p-3">
 
-                    <div class="card" >
+                        <div class="card" >
 
-                        <img src="" class="card-img-top" alt="">
+                            <div class="img-container card-img-top">
+                                
+                                <img :src="ygoCard.card_images[0].image_url" :alt="ygoCard.name">
 
-                        <div class="card-body">
+                            </div>
 
-                            <h5 class="card-title">Card title</h5>
+                            <div class="card-body">
 
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <h5 class="card-title">{{ygoCard.name}}</h5>
 
-                        
+                                <p class="card-text">{{ ygoCard.archetype }}</p>
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -77,11 +89,24 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
+@use '../assets/scss/partials/variables'as*;
 .card-container{
     background-color: white;
+    .img-container{
+    width: 100%;
 
- 
+    img{
+        width: 100%;
+    }
+    
+    }
+
+    .card-body{
+        background-color: $orange-bg;
+    }
+
+  
 }
+
 
 </style>
