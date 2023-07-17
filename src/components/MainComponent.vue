@@ -52,7 +52,7 @@ export default {
 
             </div>
 
-            <div class="row flex-wrap row-cols-4 card-container justify-content-between align-items-center mx-3 g-2">
+            <div class="row flex-wrap row-cols-5 card-container justify-content-between align-items-start mx-3 g-2">
 
                 <div v-for="(ygoCard,i) in store.cardsArray" :key="i"  class="col p-3">
                     
