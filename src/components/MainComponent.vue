@@ -84,7 +84,7 @@ export default {
 
         </div>
 
-        MAIN
+        
     </main>
 </template>
 
