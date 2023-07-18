@@ -18,7 +18,7 @@ export default {
     };
   },
   methods: {
-    getResponse(){axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+    getResponse(){axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=40&offset=0')
       .then(res=>{
         this.store.cardsArray=res.data.data
         // console.log(res.data.data[0].card_images[0].image_url)
@@ -36,24 +36,21 @@ export default {
       )
     },
     filtering(){
-      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0',{
+      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=40&offset=0',{
         params:{
           archetype:this.store.filteringParam,
 
         }
-      })
-          .then(res=>{
+      }
+      )
+        .then(res=>{
+        
+          this.store.cardsArray=res.data.data
           
-            this.store.cardsArray=res.data.data
-            
-            console.log(res)
-          }
-          )
-          .catch(err=>{
-
-          })
+          // console.log(res)
+        }
+        )
     }
-
   },
   created(){
     this.getArchetype()
