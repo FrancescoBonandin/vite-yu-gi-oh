@@ -35,7 +35,23 @@ export default {
       }
       )
     },
-    filtering(){
+    filtering(){   
+       axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php',{
+        params:{
+          archetype:this.store.filteringParam,
+
+        }
+      }
+      )
+        .then(res=>{
+        
+          this.store.totalApiArr=res.data.data
+          
+          // console.log(res)
+        }
+        )
+      
+
       axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=40&offset=0',{
         params:{
           archetype:this.store.filteringParam,
@@ -50,8 +66,17 @@ export default {
           // console.log(res)
         }
         )
+        .catch(err=>{
+          if(this.store.filteringParam==''){
+
+          }
+          else if(this.store.filteringParam!=''&& this.store.cardsArray.length==0){
+            this.store.cardsArray=[]
+          }
+        })
     }
   },
+
   created(){
     this.getArchetype()
   },

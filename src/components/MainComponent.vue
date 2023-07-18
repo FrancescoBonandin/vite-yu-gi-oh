@@ -1,9 +1,11 @@
 <script>
 import {store} from '../store.js'
+import CounterComponent from './CounterComponent.vue'
 
 export default {
     name: "MainComponent",
     components:{
+        CounterComponent,
     },
     data() {
         return {
@@ -14,7 +16,13 @@ export default {
     },
     methods: {
 
-    }
+    },
+    // computed:{
+    //     filteringResultNumber(){
+    //     const filteringResultNumber = this.store.totalApiArr.length
+    //     return filteringResultNumber
+    //     }
+    // },
 }
 </script>
 
@@ -50,11 +58,13 @@ export default {
 
             <div class="row results-found mx-3">
 
-                <div class="col text-light bg-dark">
+                <CounterComponent/>
 
-                    found {{ store.cardsArray.length }} cards
+                <!-- <div class="col text-light bg-dark">
 
-                </div>
+                    showing {{ store.cardsArray.length }} cards <span v-if="store.totalApiArr.length > 0">on {{ filteringResultNumber }}</span> 
+
+                </div> -->
 
             </div>
 
