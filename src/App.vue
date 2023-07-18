@@ -21,7 +21,7 @@ export default {
     getResponse(){axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
       .then(res=>{
         this.store.cardsArray=res.data.data
-        console.log(res.data.data[0].card_images[0].image_url)
+        // console.log(res.data.data[0].card_images[0].image_url)
 
       }
       )
@@ -31,10 +31,29 @@ export default {
       
         this.store.archetypeArray=res.data
         
-        console.log(res.data)
+        // console.log(res.data)
       }
       )
     },
+    filtering(){
+      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0',{
+        params:{
+          archetype:this.store.filteringParam,
+
+        }
+      })
+          .then(res=>{
+          
+            this.store.cardsArray=res.data.data
+            
+            console.log(res)
+          }
+          )
+          .catch(err=>{
+
+          })
+    }
+
   },
   created(){
     this.getArchetype()
@@ -50,11 +69,11 @@ export default {
 <template>
   <div class="background">
     
-    <HeaderComponent />
+    <HeaderComponent/>
   
     <LoadingScreen v-if="store.cardsArray.length==0"/>
 
-    <MainComponent v-else />
+    <MainComponent v-else  @search="filtering()" />
     
   </div>
 </template>
