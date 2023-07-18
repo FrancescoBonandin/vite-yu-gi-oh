@@ -17,30 +17,33 @@ export default {
     store,
     };
   },
-  methods: {},
-  // created(){
-  //   axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
-  //     .then(res=>{
-  //       this.store.cardsArray=res.data.data
-  //       console.log(res.data.data[0].card_images[0].image_url)
-  //       // .data.data[0].card_images[0].image_url
+  methods: {
+    getResponse(){axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+      .then(res=>{
+        this.store.cardsArray=res.data.data
+        console.log(res.data.data[0].card_images[0].image_url)
 
-  //     }
-  //     )
-  // },
+      }
+      )
+    },
+    getArchetype(){axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+      .then(res=>{
+      
+        this.store.archetypeArray=res.data
+        
+        console.log(res.data)
+      }
+      )
+    },
+  },
+  created(){
+    this.getArchetype()
+  },
   mounted(){
     // necessario per vedere il bonus
-    setTimeout(
-      ()=>{axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
-        .then(res=>{
-          this.store.cardsArray=res.data.data
-          console.log(res.data.data[0].card_images[0].image_url)
-          // .data.data[0].card_images[0].image_url
+    setTimeout(()=>{this.getResponse()},4000)
 
-        }
-        )},8000)
-    
-  }
+  },
 };
 </script>
 

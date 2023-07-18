@@ -26,17 +26,21 @@ export default {
 
                 <div class="col-auto px-2 my-3">
 
-                    <select class="form-select" aria-label="Default select example">
+                    <form  action="">
+                        
+                        <select class="form-select" aria-label="Default select example">
+    
+                            <option class="text-center" selected value="">--filter by archetype--</option>
+    
+                            <option class="text-center" v-for="(singleArchetype,i) in store.archetypeArray" :key="i" :value="singleArchetype.archetype_name">{{ singleArchetype.archetype_name }}</option>
+    
+    
+                        </select>
 
-                        <option selected>Open this select menu</option>
+                        <button>FILTER</button>
 
-                        <option value="1">One</option>
+                    </form>
 
-                        <option value="2">Two</option>
-
-                        <option value="3">Three</option>
-
-                    </select>
 
                 </div>
 
