@@ -28,7 +28,7 @@ export default {
  
     <div class="col text-light bg-dark">
 
-        showing {{ store.cardsArray.length }} cards <span v-if="store.totalApiArr.length > 0">on {{ filteringResultNumber }}</span> 
+        showing {{ store.cardsArray.length }} {{ store.filteringParam }} cards <span v-if="store.totalApiArr.length > 0">on {{ filteringResultNumber }}</span> 
 
     </div>
 
