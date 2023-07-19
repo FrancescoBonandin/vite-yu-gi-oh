@@ -35,12 +35,12 @@ export default {
       }
       )
     },
-    filtering(){   
-       axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php',{
-        params:{
-          archetype:this.store.filteringParam,
+    populateTotalApiArr(){
+      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php',{
+          params:{
+            archetype:this.store.filteringParam,
 
-        }
+          }
       }
       )
         .then(res=>{
@@ -50,6 +50,11 @@ export default {
           // console.log(res)
         }
         )
+    },
+    filtering(){   
+
+   
+      this.populateTotalApiArr()
       
 
       axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=40&offset=0',{
@@ -74,11 +79,15 @@ export default {
             this.store.cardsArray=[]
           }
         })
-    }
+    },
+  
   },
 
   created(){
-    this.getArchetype()
+    this.getArchetype(),
+
+   this.populateTotalApiArr()
+  
   },
   mounted(){
     // necessario per vedere il bonus

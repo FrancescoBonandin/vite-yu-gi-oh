@@ -15,14 +15,13 @@ export default {
         }
     },
     methods: {
-
     },
-    // computed:{
-    //     filteringResultNumber(){
-    //     const filteringResultNumber = this.store.totalApiArr.length
-    //     return filteringResultNumber
-    //     }
-    // },
+    computed:{
+        filteringResultNumber(){
+        const filteringResultNumber = this.store.totalApiArr.length
+        return filteringResultNumber
+        }
+    },
 }
 </script>
 
@@ -35,13 +34,13 @@ export default {
 
                 <div class="col-auto px-2 my-3">
 
-                    <h2>{{ store.filteringParam }}</h2>
+                    <!-- <h2>{{ store.filteringParam }}</h2> -->
 
                     <form @submit.prevent="$emit('search')" action="">
                         
                         <select class="form-select" v-model="store.filteringParam" aria-label="Default select example">
     
-                            <option class="text-center"  selected value="">--filter by archetype--</option>
+                            <option class="text-center"  selected value=null>--filter by archetype--</option>
     
                             <option class="text-center" v-for="(singleArchetype,i) in store.archetypeArray" :key="i" :value="singleArchetype.archetype_name">{{ singleArchetype.archetype_name }}</option>
     
