@@ -6,5 +6,6 @@ export const store = reactive({
     archetypeArray:[],
     cardsArray:[],
     totalApiArr:{},
+    variable:40,
 
 })

@@ -15,6 +15,7 @@ export default {
         }
     },
     methods: {
+     
     },
     computed:{
         filteringResultNumber(){
@@ -95,6 +96,14 @@ export default {
 
                 </div>
 
+            </div>
+
+            <div class="row justify-content-center align-items-center">
+                <div class="col-auto">
+                    <button @click="$emit('more     ')">
+                        Show More
+                    </button>
+                </div>
             </div>
 
         </div>

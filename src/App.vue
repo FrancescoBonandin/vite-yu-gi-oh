@@ -69,6 +69,7 @@ export default {
           this.store.cardsArray=res.data.data
           
           // console.log(res)
+          this.store.variable=0
         }
         )
         .catch(err=>{
@@ -80,13 +81,35 @@ export default {
           }
         })
     },
+    showMore(){
+      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php',{
+          params:{
+            archetype:this.store.filteringParam,
+            num:40,
+            offset:this.store.variable
+          }
+
+          .then(res=>{
+            this.store.cardsArray+=res.data.data
+            this.store.variable+=num
+          })
+      }
+      )
+        .then(res=>{
+        
+          this.store.totalApiArr=res.data.data
+          
+          // console.log(res)
+        }
+        )
+    }
   
   },
 
   created(){
     this.getArchetype(),
 
-   this.populateTotalApiArr()
+    this.populateTotalApiArr()
   
   },
   mounted(){
@@ -104,7 +127,7 @@ export default {
   
     <LoadingScreen v-if="store.cardsArray.length==0"/>
 
-    <MainComponent v-else  @search="filtering()" />
+    <MainComponent v-else  @search="filtering()" @more="showMore()" />
     
   </div>
 </template>
